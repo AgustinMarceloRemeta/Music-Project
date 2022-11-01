@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Slider sliderVolume;
+    [SerializeField] Toggle toggleMute;
+    [SerializeField] float maxValueVolume;
+    private void Awake()
     {
-        
+        sliderVolume.value = PlayerPrefs.GetFloat("volume", maxValueVolume);
+        toggleMute.isOn = (PlayerPrefs.GetInt("mute",1) == 1 ? true : false);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void ChangeLevel()
     {
-        
+        int sceneActive = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneActive>= SceneManager.sceneCount? sceneActive - 1 : sceneActive + 1);
+    }
+    public void SaveVolume()
+    {
+        PlayerPrefs.SetFloat("volume", sliderVolume.value);
+    }
+    public void SaveToggle()
+    {
+        PlayerPrefs.SetInt("mute", (toggleMute.isOn ? 1 : 0));
     }
 }
