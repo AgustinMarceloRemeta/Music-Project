@@ -1,14 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 public class AudioManager : MonoBehaviour
 {
     [SerializeField]AudioSource audioSource;
     [SerializeField] float timeSave;
-    [SerializeField] List<Subtitle> subtitles; 
+    [SerializeField] List<Subtitle> subtitles;
+    [SerializeField] Text textSubtitle;
+    Subtitle actualSubtitle;
+    [SerializeField] List<float> timeSubtitles;
     void Awake()
     {
+        foreach (Subtitle item in FindObjectsOfType<Subtitle>()) subtitles.Add(item);
         audioSource = GetComponent<AudioSource>();
         SetVolume();
         SetMute();
@@ -17,12 +23,8 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("SaveTime", timeSave, timeSave);
+        StartCoroutine(Subtitles(PlayerPrefs.GetFloat("timeSound", 0)));
     }
-    private void Update()
-    {
-        
-    }
-
     public void SetVolume()
     {
         if(audioSource != null)
@@ -39,18 +41,45 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetFloat("timeSound", audioSource.time); 
     }
 
-    IEnumerator Subtitles()
+    IEnumerator Subtitles(float time)
     {
-        foreach (var subtitle in subtitles)
+        Subtitle newSubtitle = GetNewSubtitle(time);
+        textSubtitle.text = newSubtitle.subtitleText;
+        actualSubtitle = newSubtitle;
+        if (!newSubtitle.end)
         {
-            
+            yield return new WaitForSeconds(newSubtitle.nextSubtitle.timeToInit - time);
+            StartCoroutine(Subtitles(audioSource.time));
         }
-        yield return new WaitForSeconds(2);
+        else
+        {
+            yield return new WaitForSeconds(audioSource.clip.length - time);
+            StartCoroutine(Subtitles(0));
+        }
+        
+
+    }
+
+    private Subtitle GetNewSubtitle(float audioTime)
+    {
+        if (actualSubtitle != null)  return actualSubtitle.nextSubtitle;       
+        else
+        {
+            if (timeSubtitles != null) timeSubtitles.Clear();
+            foreach (Subtitle item in subtitles)
+            {
+                if (item.timeToInit <= audioTime) timeSubtitles.Add(item.timeToInit);
+            }
+            foreach (Subtitle item in subtitles)
+            {
+                if (item.timeToInit == timeSubtitles.Max())
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+    
     }
 }
-public class Subtitle : MonoBehaviour
-{
-    float timeToInit;
-    string subtitleText;
-    Subtitle nextSubtitle;
-}
+
