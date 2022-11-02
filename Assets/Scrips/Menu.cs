@@ -7,11 +7,8 @@ public class Menu : MonoBehaviour
     [SerializeField] Slider sliderVolume;
     [SerializeField] Toggle toggleMute;
     [SerializeField] float maxValueVolume;
-    private void Awake()
-    {
-        GetValues();
-    }
-
+    private void Awake() => GetValues();
+    
     private void GetValues()
     {
         sliderVolume.value = PlayerPrefs.GetFloat("volume", maxValueVolume);
@@ -23,12 +20,9 @@ public class Menu : MonoBehaviour
         int sceneActive = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneActive>= SceneManager.sceneCount? sceneActive - 1 : sceneActive + 1);
     }
-    public void SaveVolume()
-    {
-        PlayerPrefs.SetFloat("volume", sliderVolume.value);
-    }
-    public void SaveToggle()
-    {
-        PlayerPrefs.SetInt("mute", (toggleMute.isOn ? 1 : 0));
-    }
+
+    public void SaveVolume() => PlayerPrefs.SetFloat("volume", sliderVolume.value);
+    
+    public void SaveToggle() => PlayerPrefs.SetInt("mute", (toggleMute.isOn ? 1 : 0));
+    
 }

@@ -1020,8 +1020,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26, y: 306}
-  m_SizeDelta: {x: 838.1829, y: 278.0887}
+  m_AnchoredPosition: {x: 103.5697, y: 306}
+  m_SizeDelta: {x: 993.3222, y: 278.0887}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1033324557
 MonoBehaviour:
@@ -1056,9 +1056,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Soy un titulo
-
-'
+  m_Text: Mp3 simulator
 --- !u!222 &1033324558
 CanvasRenderer:
   m_ObjectHideFlags: 0
