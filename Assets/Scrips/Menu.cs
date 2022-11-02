@@ -9,9 +9,15 @@ public class Menu : MonoBehaviour
     [SerializeField] float maxValueVolume;
     private void Awake()
     {
-        sliderVolume.value = PlayerPrefs.GetFloat("volume", maxValueVolume);
-        toggleMute.isOn = (PlayerPrefs.GetInt("mute",1) == 1 ? true : false);
+        GetValues();
     }
+
+    private void GetValues()
+    {
+        sliderVolume.value = PlayerPrefs.GetFloat("volume", maxValueVolume);
+        toggleMute.isOn = (PlayerPrefs.GetInt("mute", 0) == 1 ? true : false);
+    }
+
     public void ChangeLevel()
     {
         int sceneActive = SceneManager.GetActiveScene().buildIndex;
