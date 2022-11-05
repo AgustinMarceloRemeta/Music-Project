@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] float timeSave;
     [SerializeField] Text textSubtitle;
+    [SerializeField] Scrollbar realTimeMusic;
     [SerializeField] List<Subtitle> subtitles;
     [SerializeField] List<float> timeSubtitles;
     AudioSource audioSource;
@@ -28,6 +29,8 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(Subtitles(PlayerPrefs.GetFloat("timeSound", 0)));
     }
 
+    private void Update() => realTimeMusic.size = audioSource.time / audioSource.clip.length;
+
     public void SetVolume()
     {
         if(audioSource != null) audioSource.volume = PlayerPrefs.GetFloat("volume", 1);
@@ -40,7 +43,7 @@ public class AudioManager : MonoBehaviour
 
     public void SaveTime() => PlayerPrefs.SetFloat("timeSound", audioSource.time); 
 
-    IEnumerator Subtitles(float time)
+     IEnumerator Subtitles(float time)
     {
         Subtitle newSubtitle = GetNewSubtitle(time);
         textSubtitle.text = newSubtitle.subtitleText;
@@ -71,5 +74,15 @@ public class AudioManager : MonoBehaviour
             return null;
         }
     }
+
+    public void ResetMusic() => audioSource.time = 0;
+
+    public void InitSubtitles()
+    {
+        actualSubtitle = null;
+        StartCoroutine(Subtitles(audioSource.time));
+    }
+
+
 }
 
