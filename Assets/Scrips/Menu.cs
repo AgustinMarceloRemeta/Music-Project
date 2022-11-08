@@ -33,4 +33,6 @@ public class Menu : MonoBehaviour
         _sliderVolume.value = _maxValueVolume;
     }
 
+    public void exit() => Application.Quit();
+
 }
