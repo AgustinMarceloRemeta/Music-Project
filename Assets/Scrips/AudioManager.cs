@@ -23,11 +23,8 @@ public class AudioManager : MonoBehaviour
         _audioSource.time = PlayerPrefs.GetFloat("timeSound", 0);
     }
 
-    private void Start()
-    {
-        InvokeRepeating("SaveTime", _timeSave, _timeSave);
-        StartCoroutine(Subtitles(PlayerPrefs.GetFloat("timeSound", 0)));
-    }
+    private void Start() => StartCoroutine(Subtitles(PlayerPrefs.GetFloat("timeSound", 0)));
+    
 
     private void Update() => _realTimeMusic.size = _audioSource.time / _audioSource.clip.length;
 
@@ -87,4 +84,7 @@ public class AudioManager : MonoBehaviour
     {
         if (!_audioSource.isPlaying) _audioSource.Play();
     }
+
+    void OnApplicationQuit() => SaveTime();
+    
 } 
