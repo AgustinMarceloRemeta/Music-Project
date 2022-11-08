@@ -669,9 +669,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f333fd9b5b5d926408e47908903385e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderVolume: {fileID: 787981499}
-  toggleMute: {fileID: 1110816741}
-  maxValueVolume: 1
+  _sliderVolume: {fileID: 787981499}
+  _toggleMute: {fileID: 1110816741}
+  _maxValueVolume: 1
 --- !u!4 &458798689
 Transform:
   m_ObjectHideFlags: 0

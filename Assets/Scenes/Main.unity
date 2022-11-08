@@ -200,9 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f333fd9b5b5d926408e47908903385e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderVolume: {fileID: 1306270280}
-  toggleMute: {fileID: 1907511168}
-  maxValueVolume: 1
+  _sliderVolume: {fileID: 1306270280}
+  _toggleMute: {fileID: 1907511168}
+  _maxValueVolume: 0.5
 --- !u!4 &80302213
 Transform:
   m_ObjectHideFlags: 0
@@ -2112,11 +2112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4194817383b7e42a35e24ed549aa4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSave: 0.5
-  textSubtitle: {fileID: 1030522610}
-  realTimeMusic: {fileID: 760697769}
-  subtitles: []
-  timeSubtitles: []
+  _timeSave: 0.5
+  _textSubtitle: {fileID: 1030522610}
+  _realTimeMusic: {fileID: 760697769}
+  _subtitles: []
+  _timeSubtitles: []
 --- !u!4 &854346148
 Transform:
   m_ObjectHideFlags: 0
