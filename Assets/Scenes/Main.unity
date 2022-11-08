@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sliderVolume: {fileID: 1306270280}
   _toggleMute: {fileID: 1907511168}
-  _maxValueVolume: 0.5
+  _maxValueVolume: 1
 --- !u!4 &80302213
 Transform:
   m_ObjectHideFlags: 0
